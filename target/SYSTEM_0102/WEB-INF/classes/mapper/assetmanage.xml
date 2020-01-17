@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whut.Dao.assetDao" >
+    <select id="showAssets" resultType="com.whut.beans.Assset">
+        select * from assset
+    </select>
+    <insert id="addAsset" parameterType="com.whut.beans.Assset">
+      insert into assset (assetName,assetCount,assetOperator,assetPrice,assetAddress) values (#{assetName},#{assetCount},#{assetOperator},#{assetPrice},#{assetAddress})
+    </insert>
+
+
+    <delete id="deleteAsset" parameterType="com.whut.beans.Assset">
+        DELETE FROM assset WHERE assetId=#{assetId}
+</delete>
+    <update id="updateAsset" parameterType="com.whut.beans.Assset">
+      UPDATE assset SET assetName=#{assetName},assetCount=#{assetCount},assetPrice=#{assetPrice},assetAddress=#{assetAddress},assetOperator=#{assetOperator} where assetId=#{assetId}
+  </update>
+
+    <update id="updateAssetCount" parameterType="com.whut.beans.Assset" >
+          update assset set assetCount=#{assetCount} where assetId=#{assetId}
+ </update>
+
+    <update id="assetCate" parameterType="com.whut.beans.Assset" >
+          update assset set assetPrice=#{assetPrice},assetCate=#{assetCate} where assetId=#{assetId}
+ </update>
+
+    <select id="searchbyID" resultType="com.whut.beans.Assset"  parameterType="int">
+         select * from assset where assetId=#{assetId}
+ </select>
+
+    <select id="showAssetbyName" resultType="com.whut.beans.Assset">
+        select * from assset where assetName=#{assetName}
+    </select>
+
+    <select id="findAssetByName" resultType="com.whut.beans.Assset" parameterType="Assset">
+        SELECT * FROM assset WHERE assetName LIKE CONCAT(CONCAT('%',#{assetName},'%'))
+</select>
+
+
+
+</mapper>
